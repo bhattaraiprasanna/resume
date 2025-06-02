@@ -167,9 +167,9 @@ export default function Home() {
 
             <div>
               <h5 className="font-semibold text-gray-800">
-                dashboard.wizzgift (B2B Platform) (
+                b2b.wizzgift (B2B Platform) (
                 <a
-                  href="https://dashboard.wizzgift.com"
+                  href="https://www.b2b.wizzgift.com/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-blue-600 hover:underline"
@@ -258,7 +258,7 @@ export default function Home() {
             EDUCATION
           </h2>
           <h3 className="text-lg font-semibold text-gray-800">
-            Bachelor of Engineering in Computer Engineering (2019-ongoing)
+            Bachelor of Engineering in Computer Engineering (2019-2025)
           </h3>
           <p className="text-gray-700">
             Gandaki College Of Engineering and Science | Pokhara, Nepal
