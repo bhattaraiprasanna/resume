@@ -169,7 +169,7 @@ export default function Home() {
               <h5 className="font-semibold text-gray-800">
                 b2b.wizzgift (B2B Platform) (
                 <a
-                  href="https://www.b2b.wizzgift.com/"
+                  href="https://business.wizzgift.com/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-blue-600 hover:underline"
