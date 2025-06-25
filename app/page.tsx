@@ -171,7 +171,7 @@ export default function Home() {
                   rel="noopener noreferrer"
                   className="text-blue-600 hover:underline"
                 >
-                  dashboard.wizzgift.com
+                  business.wizzgift.com
                 </a>
                 )
               </h5>
