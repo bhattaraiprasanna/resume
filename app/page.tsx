@@ -82,11 +82,8 @@ export default function Home() {
             </li> 
             <li>
               <span className="font-semibold">UI/UX & Tools:</span>{" "}
-              Figma, ShadCN, Lucide Icons, Responsive Design
+              Figma, ShadCN, Lucide Icons, Responsive Design, Git, GitHub 
             </li>
-            <li>
-              <span className="font-semibold">CI/CD & Deployment:</span> Git, GitHub 
-            </li>  
           </ul>
         </section>
 
