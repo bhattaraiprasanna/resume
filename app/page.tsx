@@ -196,7 +196,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div>
+          {/* <div>
             <div className="flex flex-col md:flex-row md:justify-between mb-1">
               <h3 className="text-lg font-semibold text-gray-800">
                 College projects 
@@ -246,7 +246,7 @@ export default function Home() {
                 </li>
               </ul>
             </div>
-          </div>
+          </div> */}
         </section>
 
         {/* Education Section */}
