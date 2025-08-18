@@ -99,7 +99,7 @@ export default function Home() {
               Frontend Developer
               </h3>
               <p className="text-gray-600">
-                Adbreakmedia, December 2024 - Present
+                Adbreakmedia, December 2024 - June2025
               </p>
             </div>
             <ul className="list-disc pl-5 text-gray-700 space-y-1 mb-4">
