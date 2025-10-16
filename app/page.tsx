@@ -1,5 +1,6 @@
 import { Github, Linkedin, Mail, MapPin, Phone } from "lucide-react";
 import { PrintButton } from "@/components/print-button";
+import { DownloadButton } from "@/components/download";
 
 export default function Home() {
   return (
@@ -78,7 +79,7 @@ export default function Home() {
           <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 text-gray-700"> 
             <li>
               <span className="font-semibold">Frontend Technologies:</span>{" "}
-              React.js, HTML, CSS, JavaScript
+              React.js/Next.js, HTML, CSS, JavaScript
             </li> 
             <li>
               <span className="font-semibold">UI/UX & Tools:</span>{" "}
@@ -195,7 +196,58 @@ export default function Home() {
             </div>
             </div>
           </div>
+          <div className="mb-6">
+    <div className="flex flex-col md:flex-row md:justify-between mb-1">
+      <h3 className="text-lg font-semibold text-gray-800">Frontend Developer</h3>
+      <p className="text-gray-600">Data Saturn, September 2025 - Present</p>
+    </div>
+    <ul className="list-disc pl-5 text-gray-700 space-y-1 mb-4">
+      <li>
+        <span className="font-medium">UI Maintenance & Enhancements:</span>{" "}
+        Focused on refining existing UI components, improving layout consistency, and fixing responsiveness issues across multiple pages.
+      </li>
+      <li>
+        <span className="font-medium">Design Implementation:</span>{" "}
+        Collaborated with designers to align visual elements and improve overall user experience.
+      </li>
+      <li>
+        <span className="font-medium">Code Review & Polishing:</span>{" "}
+        Ensured reusable, well-structured, and clean frontend code following best practices.
+      </li>
+    </ul>
 
+    <h4 className="text-md font-semibold text-gray-800 mt-4 mb-2">
+      Key Products Developed:
+    </h4>
+
+    <div className="space-y-4 pl-5">
+      <div>
+        <h5 className="font-semibold text-gray-800">
+          Creation Nepal (
+          <a
+            href="https://creationnepal.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-600 hover:underline"
+          >
+            creationnepal.com
+          </a>
+          )
+        </h5>
+        <ul className="list-disc pl-5 text-gray-700 space-y-1">
+          <li>
+            Worked on frontend design fixes and minor UI improvements for smoother responsiveness and better accessibility.
+          </li>
+          <li>
+            Collaborated with the team to enhance component structure and maintain a consistent design system.
+          </li>
+          <li>
+            Assisted in layout adjustments and performance refinements during development cycles.
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
           {/* <div>
             <div className="flex flex-col md:flex-row md:justify-between mb-1">
               <h3 className="text-lg font-semibold text-gray-800">
@@ -263,7 +315,7 @@ export default function Home() {
         </section>
 
         {/* Additional Information Section */}
-        <section>
+        {/* <section>
           <h2 className="text-xl font-bold text-gray-900 border-b border-gray-300 pb-1 mb-3">
             ADDITIONAL INFORMATION
           </h2>
@@ -282,9 +334,12 @@ export default function Home() {
               technical blogs
             </li>
           </ul>
-        </section>
+        </section> */}
       </div>
+
       <PrintButton />
+      <DownloadButton />
+
     </main>
   );
 }
