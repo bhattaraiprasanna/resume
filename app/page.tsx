@@ -199,7 +199,7 @@ export default function Home() {
           <div className="mb-6">
     <div className="flex flex-col md:flex-row md:justify-between mb-1">
       <h3 className="text-lg font-semibold text-gray-800">Frontend Developer</h3>
-      <p className="text-gray-600">Data Saturn, September 2025 - Present</p>
+      <p className="text-gray-600">Data Saturn, September 2025 - October 2025</p>
     </div>
     <ul className="list-disc pl-5 text-gray-700 space-y-1 mb-4">
       <li>
