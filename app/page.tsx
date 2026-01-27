@@ -48,7 +48,7 @@ export default function Home() {
                 rel="noopener noreferrer"
                 className="hover:text-blue-600"
               >
-                linkedin.com/in/prasannabhattarai
+                linkedin.com/in/prasanna-bhattarai-47a396329
               </a>
             </div>
             <div className="flex items-center gap-1">
