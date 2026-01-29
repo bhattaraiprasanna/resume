@@ -81,7 +81,9 @@ export function DownloadButton() {
       pdf.save("Prasanna_Bhattarai_Resume.pdf")
     } catch (err) {
       console.error("Download failed:", err)
-      window.print()
+      // Never fall back to printing from the download button.
+      // Printing should only happen via the dedicated PrintButton.
+      alert("Download failed. Please try again.")
     } finally {
       setTimeout(() => setIsDownloading(false), 500)
     }
