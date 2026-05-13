@@ -2,11 +2,34 @@
 
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
-import { ArrowDown, FileText, Split } from "lucide-react"
+import { FileText, Split } from "lucide-react"
 
 export function DownloadButtons() {
   const [isDownloading, setIsDownloading] = useState(false)
 
+  const fixSvgIcons = async (clone: HTMLElement) => {
+    const icons = clone.querySelectorAll("svg")
+    await Promise.all(
+      Array.from(icons).map(async (icon) => {
+        const serializer = new XMLSerializer()
+        const svgString = serializer.serializeToString(icon)
+        const svgBase64 =
+          "data:image/svg+xml;base64," +
+          btoa(unescape(encodeURIComponent(svgString)))
+        const img = document.createElement("img")
+        img.src = svgBase64
+        img.width = icon.clientWidth || 16
+        img.height = icon.clientHeight || 16
+        img.style.display = "inline-block"
+        img.style.verticalAlign = "middle"
+        img.style.marginRight = "4px"
+        img.style.marginBottom = "2px"
+        icon.replaceWith(img)
+      })
+    )
+  }
+
+  // ─── Single-page download ────────────────────────────────────────────────────
   const handleSinglePageDownload = async () => {
     setIsDownloading(true)
     try {
@@ -16,101 +39,46 @@ export function DownloadButtons() {
       const html2canvas = (await import("html2canvas")).default
       const { jsPDF } = await import("jspdf")
 
-      // Clone container for manipulation
       const clone = container.cloneNode(true) as HTMLElement
+      await fixSvgIcons(clone)
 
-      // Fix SVG icons
-      const icons = clone.querySelectorAll("svg")
-      await Promise.all(
-        Array.from(icons).map(async (icon) => {
-          const serializer = new XMLSerializer()
-          const svgString = serializer.serializeToString(icon)
-          const svgBase64 = "data:image/svg+xml;base64," + btoa(unescape(encodeURIComponent(svgString)))
-
-          const img = document.createElement("img")
-          img.src = svgBase64
-          img.width = icon.clientWidth || 16
-          img.height = icon.clientHeight || 16
-          img.style.display = "inline-block"
-          img.style.verticalAlign = "middle"
-          img.style.marginRight = "4px"
-          img.style.marginBottom = "2px"
-
-          icon.replaceWith(img)
-        })
-      )
-
-      // Fix flex containers
-      const flexContainers = clone.querySelectorAll('[class*="flex items-center"]')
-      flexContainers.forEach(container => {
-        const element = container as HTMLElement
-        element.style.display = "inline-flex"
-        element.style.alignItems = "center"
-        element.style.gap = "4px"
-      })
-
-      // Create wrapper for single page rendering
       const wrapper = document.createElement("div")
-      wrapper.style.position = "fixed"
-      wrapper.style.top = "-9999px"
-      wrapper.style.width = "800px" // Wider for single page
-      wrapper.style.backgroundColor = "white"
-      wrapper.style.padding = "20px"
+      wrapper.style.cssText = `
+        position: fixed; top: -99999px; left: 0;
+        width: 800px; background: white; padding: 20px;
+      `
       wrapper.appendChild(clone)
       document.body.appendChild(wrapper)
 
-      // Capture with higher scale for better quality
       const canvas = await html2canvas(clone, {
-        scale: 1.5,
-        useCORS: true,
-        logging: false,
-        width: 800,
-        height: clone.scrollHeight
+        scale: 2, useCORS: true, logging: false,
+        width: 800, height: clone.scrollHeight,
       })
-
       document.body.removeChild(wrapper)
 
-      const imgData = canvas.toDataURL("image/png", 0.95)
-      const pdf = new jsPDF({
-        unit: "pt",
-        format: "a4",
-        orientation: "portrait",
-      })
-
-      const pdfWidth = pdf.internal.pageSize.getWidth()
-      const pdfHeight = pdf.internal.pageSize.getHeight()
-      const imgWidth = canvas.width
-      const imgHeight = canvas.height
-      const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight)
-
-      // If content fits on one page, center it
-      if (imgHeight * ratio <= pdfHeight) {
-        const imgScaledWidth = imgWidth * ratio
-        const imgScaledHeight = imgHeight * ratio
-        const marginX = (pdfWidth - imgScaledWidth) / 2
-        const marginY = (pdfHeight - imgScaledHeight) / 2
-
-        pdf.addImage(imgData, "PNG", marginX, marginY, imgScaledWidth, imgScaledHeight)
-      } else {
-        // If content is too tall, scale it down to fit
-        const scale = pdfHeight / imgHeight
-        const imgScaledWidth = imgWidth * scale
-        const imgScaledHeight = imgHeight * scale
-        const marginX = Math.max(0, (pdfWidth - imgScaledWidth) / 2)
-
-        pdf.addImage(imgData, "PNG", marginX, 0, imgScaledWidth, imgScaledHeight)
-      }
-
+      const pdf = new jsPDF({ unit: "pt", format: "a4", orientation: "portrait" })
+      const pdfW = pdf.internal.pageSize.getWidth()
+      const pdfH = pdf.internal.pageSize.getHeight()
+      const ratio = Math.min(pdfW / canvas.width, pdfH / canvas.height)
+      const scaledW = canvas.width * ratio
+      const scaledH = canvas.height * ratio
+      pdf.addImage(
+        canvas.toDataURL("image/png"),
+        "PNG",
+        (pdfW - scaledW) / 2,
+        scaledH < pdfH ? (pdfH - scaledH) / 2 : 0,
+        scaledW, scaledH
+      )
       pdf.save("Prasanna_Bhattarai_Resume_SinglePage.pdf")
     } catch (err) {
-      console.error("Single page download failed:", err)
-      const errorMessage = err instanceof Error ? err.message : "Unknown error occurred"
-      alert(`Single page download failed: ${errorMessage}. Please try again.`)
+      console.error(err)
+      alert("Single-page download failed. Please try again.")
     } finally {
       setTimeout(() => setIsDownloading(false), 500)
     }
   }
 
+  // ─── Two-page download ───────────────────────────────────────────────────────
   const handleMultiPageDownload = async () => {
     setIsDownloading(true)
     try {
@@ -120,210 +88,105 @@ export function DownloadButtons() {
       const html2canvas = (await import("html2canvas")).default
       const { jsPDF } = await import("jspdf")
 
-      // Clone container for manipulation
+      const pdf = new jsPDF({ unit: "pt", format: "a4", orientation: "portrait" })
+      const pdfW = pdf.internal.pageSize.getWidth()   // 595.28
+      const pdfH = pdf.internal.pageSize.getHeight()  // 841.89
+
+      const MARGIN_PT = 20
+      const CONTENT_W_PT = pdfW - MARGIN_PT * 2
+      const CONTENT_H_PT = pdfH - MARGIN_PT * 2
+      const RENDER_PX = 900
+      const SCALE = 2
+
+      // --- Collect blocks (header + sections) ---
       const clone = container.cloneNode(true) as HTMLElement
+      await fixSvgIcons(clone)
 
-      // Fix SVG icons
-      const icons = clone.querySelectorAll("svg")
-      await Promise.all(
-        Array.from(icons).map(async (icon) => {
-          const serializer = new XMLSerializer()
-          const svgString = serializer.serializeToString(icon)
-          const svgBase64 = "data:image/svg+xml;base64," + btoa(unescape(encodeURIComponent(svgString)))
-
-          const img = document.createElement("img")
-          img.src = svgBase64
-          img.width = icon.clientWidth || 16
-          img.height = icon.clientHeight || 16
-          img.style.display = "inline-block"
-          img.style.verticalAlign = "middle"
-          img.style.marginRight = "4px"
-          img.style.marginBottom = "2px"
-
-          icon.replaceWith(img)
-        })
-      )
-
-      // Fix flex containers
-      const flexContainers = clone.querySelectorAll('[class*="flex items-center"]')
-      flexContainers.forEach(container => {
-        const element = container as HTMLElement
-        element.style.display = "inline-flex"
-        element.style.alignItems = "center"
-        element.style.gap = "4px"
-      })
-
-      // Split content into sections for multi-page PDF
-      const sections = clone.querySelectorAll("section")
       const header = clone.querySelector("header")
+      const sections = Array.from(clone.querySelectorAll("section"))
+      const rawBlocks: HTMLElement[] = []
+      if (header) rawBlocks.push(header as HTMLElement)
+      rawBlocks.push(...(sections as HTMLElement[]))
 
-      const pdf = new jsPDF({
-        unit: "pt",
-        format: "a4",
-        orientation: "portrait",
-      })
+      // --- Render each block, measure its PDF height ---
+      type RenderedBlock = { imgData: string; ptH: number }
+      const blocks: RenderedBlock[] = []
 
-      const pdfWidth = pdf.internal.pageSize.getWidth()
-      const pdfHeight = pdf.internal.pageSize.getHeight()
-      const margin = 40
-      const contentWidth = pdfWidth - (margin * 2)
-      const contentHeight = pdfHeight - (margin * 2)
-      const renderWidth = container.getBoundingClientRect().width
+      for (const block of rawBlocks) {
+        const el = block.cloneNode(true) as HTMLElement
+        const wrapper = document.createElement("div")
+        wrapper.style.cssText = `
+          position: fixed; top: -99999px; left: 0;
+          width: ${RENDER_PX}px; background: white;
+          padding: 0; margin: 0;
+        `
+        wrapper.appendChild(el)
+        document.body.appendChild(wrapper)
 
-      let currentY = margin
-      let pageNum = 1
+        const canvas = await html2canvas(wrapper, {
+          scale: SCALE, useCORS: true, logging: false,
+          width: RENDER_PX,
+        })
+        document.body.removeChild(wrapper)
 
-      // Function to add page number
-      const addPageNumber = (page: number) => {
-        pdf.setFontSize(10)
-        pdf.setTextColor(128, 128, 128)
-        pdf.text(`Page ${page}`, pdfWidth - margin, pdfHeight - 20, { align: "right" })
+        // canvas.height / SCALE = logical px height; scale to PDF content width
+        const ptH = (canvas.height / SCALE / RENDER_PX) * CONTENT_W_PT
+        blocks.push({ imgData: canvas.toDataURL("image/png"), ptH })
       }
 
-      // Function to add bottom border
-      const addBottomBorder = () => {
-        pdf.setDrawColor(200, 200, 200)
+      const GAP_PT = 8
+      const naturalSum = blocks.reduce((s, b) => s + b.ptH, 0)
+      const totalGaps = GAP_PT * (blocks.length - 1)
+
+      // Scale so all content fits in exactly 2 pages
+      const twoPageUsable = CONTENT_H_PT * 2 - totalGaps
+      const globalScale = naturalSum > twoPageUsable ? twoPageUsable / naturalSum : 1
+
+      const scaledBlocks = blocks.map(b => ({ ...b, ptH: b.ptH * globalScale }))
+
+      // --- Greedy fill: pack page 1 as full as possible without splitting a section ---
+      let p1End = 0
+      let p1Used = 0
+      for (let i = 0; i < scaledBlocks.length; i++) {
+        const addH = scaledBlocks[i].ptH + (i > 0 ? GAP_PT : 0)
+        if (p1Used + addH > CONTENT_H_PT && i > 0) {
+          p1End = i
+          break
+        }
+        p1Used += addH
+        p1End = i + 1
+      }
+
+      // If all blocks fit on page 1 somehow, split at midpoint
+      if (p1End === scaledBlocks.length) {
+        p1End = Math.ceil(scaledBlocks.length / 2)
+      }
+
+      // --- Draw pages ---
+      const drawPage = (pageIdx: number, from: number, to: number) => {
+        if (pageIdx > 0) pdf.addPage()
+        let y = MARGIN_PT
+        for (let i = from; i < to; i++) {
+          const b = scaledBlocks[i]
+          pdf.addImage(b.imgData, "PNG", MARGIN_PT, y, CONTENT_W_PT, b.ptH)
+          y += b.ptH + GAP_PT
+        }
+        // Footer
+        pdf.setDrawColor(220, 220, 220)
         pdf.setLineWidth(0.5)
-        pdf.line(margin, pdfHeight - 30, pdfWidth - margin, pdfHeight - 30)
+        pdf.line(MARGIN_PT, pdfH - 18, pdfW - MARGIN_PT, pdfH - 18)
+        pdf.setFontSize(8)
+        pdf.setTextColor(150, 150, 150)
+        pdf.text(`${pageIdx + 1} / 2`, pdfW - MARGIN_PT, pdfH - 7, { align: "right" })
       }
 
-      // Add header to first page
-      if (header) {
-        const wrapper = document.createElement("div")
-        wrapper.style.position = "fixed"
-        wrapper.style.top = "-9999px"
-        wrapper.style.width = `${renderWidth}px`
-        wrapper.style.backgroundColor = "white"
-        wrapper.style.padding = "0"
-        wrapper.appendChild(header.cloneNode(true))
-        document.body.appendChild(wrapper)
+      drawPage(0, 0, p1End)
+      drawPage(1, p1End, scaledBlocks.length)
 
-        const canvas = await html2canvas(wrapper, {
-          scale: 2,
-          useCORS: true,
-          logging: false,
-          width: renderWidth,
-        })
-
-        document.body.removeChild(wrapper)
-
-        const imgData = canvas.toDataURL("image/png")
-        const imgHeight = (canvas.height * contentWidth) / canvas.width
-
-        if (currentY + imgHeight > pdfHeight - margin - 50) {
-          addBottomBorder()
-          addPageNumber(pageNum)
-          pdf.addPage()
-          pageNum++
-          currentY = margin
-        }
-
-        pdf.addImage(imgData, "PNG", margin, currentY, contentWidth, imgHeight)
-        currentY += imgHeight + 20
-      }
-
-      // Process each section
-      for (let i = 0; i < sections.length; i++) {
-        const section = sections[i]
-        const sectionClone = section.cloneNode(true) as HTMLElement
-
-        // Add page break before major sections (except first)
-        if (i > 0 && (section.querySelector("h2")?.textContent?.includes("PROFESSIONAL EXPERIENCE") ||
-                     section.querySelector("h2")?.textContent?.includes("PRODUCTS DEVELOPED"))) {
-          addBottomBorder()
-          addPageNumber(pageNum)
-          pdf.addPage()
-          pageNum++
-          currentY = margin
-        }
-
-        const wrapper = document.createElement("div")
-        wrapper.style.position = "fixed"
-        wrapper.style.top = "-9999px"
-        wrapper.style.width = `${renderWidth}px`
-        wrapper.style.backgroundColor = "white"
-        wrapper.style.padding = "0"
-        wrapper.appendChild(sectionClone)
-        document.body.appendChild(wrapper)
-
-        const canvas = await html2canvas(wrapper, {
-          scale: 2,
-          useCORS: true,
-          logging: false,
-          width: renderWidth,
-        })
-
-        document.body.removeChild(wrapper)
-
-        const imgData = canvas.toDataURL("image/png")
-        const imgHeight = (canvas.height * contentWidth) / canvas.width
-
-        // Check if section fits on current page
-        if (currentY + imgHeight > pdfHeight - margin - 50) {
-          // If section is too tall for a single page, split it
-          if (imgHeight > contentHeight - 50) {
-            // Split large sections
-            const splitHeight = contentHeight - 50
-            const splitRatio = splitHeight / imgHeight
-
-            // First part of section
-            const firstPartCanvas = document.createElement("canvas")
-            const firstPartCtx = firstPartCanvas.getContext("2d")!
-            firstPartCanvas.width = canvas.width
-            firstPartCanvas.height = splitHeight * (canvas.height / imgHeight)
-
-            const tempImg = new Image()
-            tempImg.src = imgData
-            await new Promise(resolve => tempImg.onload = resolve)
-
-            firstPartCtx.drawImage(tempImg, 0, 0, canvas.width, firstPartCanvas.height, 0, 0, canvas.width, firstPartCanvas.height)
-            const firstPartData = firstPartCanvas.toDataURL("image/png")
-
-            pdf.addImage(firstPartData, "PNG", margin, currentY, contentWidth, splitHeight)
-            addBottomBorder()
-            addPageNumber(pageNum)
-            pdf.addPage()
-            pageNum++
-            currentY = margin
-
-            // Second part of section
-            const secondPartCanvas = document.createElement("canvas")
-            const secondPartCtx = secondPartCanvas.getContext("2d")!
-            secondPartCanvas.width = canvas.width
-            secondPartCanvas.height = canvas.height - firstPartCanvas.height
-
-            secondPartCtx.drawImage(tempImg, 0, firstPartCanvas.height, canvas.width, secondPartCanvas.height, 0, 0, canvas.width, secondPartCanvas.height)
-            const secondPartData = secondPartCanvas.toDataURL("image/png")
-
-            const secondPartHeight = (secondPartCanvas.height * contentWidth) / canvas.width
-            pdf.addImage(secondPartData, "PNG", margin, currentY, contentWidth, secondPartHeight)
-            currentY += secondPartHeight + 20
-          } else {
-            // Section fits on next page
-            addBottomBorder()
-            addPageNumber(pageNum)
-            pdf.addPage()
-            pageNum++
-            currentY = margin
-            pdf.addImage(imgData, "PNG", margin, currentY, contentWidth, imgHeight)
-            currentY += imgHeight + 20
-          }
-        } else {
-          // Section fits on current page
-          pdf.addImage(imgData, "PNG", margin, currentY, contentWidth, imgHeight)
-          currentY += imgHeight + 20
-        }
-      }
-
-      // Add page number to last page
-      addBottomBorder()
-      addPageNumber(pageNum)
-
-      pdf.save("Prasanna_Bhattarai_Resume_MultiPage.pdf")
+      pdf.save("Prasanna_Bhattarai_Resume_2Page.pdf")
     } catch (err) {
-      console.error("Multi-page download failed:", err)
-      const errorMessage = err instanceof Error ? err.message : "Unknown error occurred"
-      alert(`Multi-page download failed: ${errorMessage}. Please try again.`)
+      console.error(err)
+      alert("Two-page download failed. Please try again.")
     } finally {
       setTimeout(() => setIsDownloading(false), 500)
     }
@@ -343,7 +206,7 @@ export function DownloadButtons() {
         onClick={handleMultiPageDownload}
         className="rounded-full p-3 shadow-lg hover:shadow-xl active:scale-95 transition-transform bg-green-600 hover:bg-green-700"
         disabled={isDownloading}
-        title="Download Multi-Page PDF"
+        title="Download 2-Page PDF"
       >
         <Split className="h-4 w-4" />
       </Button>

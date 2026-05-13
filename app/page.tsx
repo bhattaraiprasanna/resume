@@ -4,16 +4,16 @@ import { DownloadButtons } from "@/components/download-buttons";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-white">
-      <div id="resume-content" className="container mx-auto px-4 py-8 max-w-4xl">
+    <main className="min-h-screen bg-white text-slate-900 antialiased">
+      <div id="resume-content" className="container mx-auto px-4 py-6 max-w-3xl text-sm leading-6">
         {/* Header Section */}
-        <header className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-900">PRASANNA BHATTARAI</h1>
-          <p className="text-xl mt-2 text-gray-700">
+        <header className="mb-4">
+          <h1 className="text-3xl md:text-4xl font-bold text-gray-900">PRASANNA BHATTARAI</h1>
+          <p className="text-base mt-1 text-gray-700">
             Frontend developer
           </p>
 
-          <div className="flex flex-wrap gap-4 mt-2 text-sm text-gray-600">
+          <div className="flex flex-wrap gap-3 mt-2 text-sm text-gray-600">
             <div className="flex items-center gap-1">
               <Phone className="h-4 w-4" />
               <a href="tel:+9779841028722" className="hover:text-blue-600">
@@ -59,8 +59,8 @@ export default function Home() {
         </header>
 
         {/* Summary Section */}
-        <section className="mb-8">
-          <h2 className="text-xl font-bold text-gray-900 border-b border-gray-300 pb-1 mb-3">
+        <section className="mb-4">
+          <h2 className="text-lg font-bold text-gray-900 border-b border-gray-300 pb-1 mb-3">
             SUMMARY
           </h2>
           <p className="text-gray-700">
@@ -71,8 +71,8 @@ export default function Home() {
           </p>
         </section>
 
-         <section className="mb-8">
-          <h2 className="text-xl font-bold text-gray-900 border-b border-gray-300 pb-1 mb-3">
+         <section className="mb-4">
+          <h2 className="text-lg font-bold text-gray-900 border-b border-gray-300 pb-1 mb-3">
             EDUCATION
           </h2>
           <h3 className="font-semibold text-gray-800">
@@ -97,8 +97,8 @@ export default function Home() {
         </section>
 
         {/* Core Skills Section */}
-        <section className="mb-8">
-          <h2 className="text-xl font-bold text-gray-900 border-b border-gray-300 pb-1 mb-3">
+        <section className="mb-4">
+          <h2 className="text-lg font-bold text-gray-900 border-b border-gray-300 pb-1 mb-3">
             CORE SKILLS
           </h2>
           <ul className="grid grid-cols-1 md:grid-cols-3 gap-2 text-gray-700"> 
@@ -118,20 +118,20 @@ export default function Home() {
         </section>
 
         {/* Professional Experience Section */}
-        <section className="mb-8">
-          <h2 className="text-xl font-bold text-gray-900 border-b border-gray-300 pb-1 mb-3">
+        <section className="mb-4">
+          <h2 className="text-lg font-bold text-gray-900 border-b border-gray-300 pb-1 mb-3">
             PROFESSIONAL EXPERIENCE
           </h2>
-          <div className="mb-6">
+          <div className="mb-4">
             <div className="flex flex-col md:flex-row md:justify-between mb-1">
-              <h3 className="text-lg font-semibold text-gray-800">
+              <h3 className="text-base md:text-lg font-semibold text-gray-800">
               Adbreakmedia
               </h3>
               <p className="text-gray-600">
                 Internship , December2024 - March2025
               </p>
             </div>
-            <ul className="list-disc pl-5 text-gray-700 space-y-1 mb-4">
+            <ul className="list-disc pl-5 text-gray-700 space-y-1 mb-3">
               <li>
               <span className="font-medium">Frontend Development:</span>{" "}
                 Assisted in frontend development tasks using React.js and JavaScript
@@ -147,16 +147,16 @@ export default function Home() {
             </ul>
           </div>
 
-          <div className="mb-6">
+          <div className="mb-4">
             <div className="flex flex-col md:flex-row md:justify-between mb-1">
-              <h3 className="text-lg font-semibold text-gray-800">
+              <h3 className="text-base md:text-lg font-semibold text-gray-800">
               Adbreakmedia
               </h3>
               <p className="text-gray-600">
                 Frontend Developer, March2024 - June2025, January2026 - Present
               </p>
             </div>
-            <ul className="list-disc pl-5 text-gray-700 space-y-1 mb-4">
+            <ul className="list-disc pl-5 text-gray-700 space-y-1 mb-3">
               <li>
               <span className="font-medium">Frontend Development:</span>{" "}
                 Built and maintained highly interactive user interfaces using React.js and Tailwind CSS
@@ -173,18 +173,14 @@ export default function Home() {
                 <span className="font-medium">Performance Optimization:</span>{" "}
                 Improved page performance through lazy loading, code splitting, and caching strategies
               </li>
-              <li>
-                <span className="font-medium">CI/CD & DevOps Collaboration:</span>{" "}
-                Supported deployment pipelines using GitHub Actions and worked with backend/devops for staging & production rollouts
-              </li>
             </ul>
           </div>
-          <div className="mb-6">
-    <div className="flex flex-col md:flex-row md:justify-between mb-1">
-      <h3 className="text-lg font-semibold text-gray-800">Data Saturn</h3>
+          <div className="mb-4">
+    <div className="flex flex-col md:flex-row md:justify-between mb-0.5">
+      <h3 className="text-base md:text-lg font-semibold text-gray-800">Data Saturn</h3>
       <p className="text-gray-600">Frontend Developer, September2025 - October2025</p>
     </div>
-    <ul className="list-disc pl-5 text-gray-700 space-y-1 mb-4">
+    <ul className="list-disc pl-5 text-gray-700 space-y-1 mb-3">
       <li>
         <span className="font-medium">UI Maintenance & Enhancements:</span>{" "}
         Focused on refining existing UI components, improving layout consistency, and fixing responsiveness issues across multiple pages.
@@ -203,12 +199,12 @@ export default function Home() {
 
           {/* <div>
             <div className="flex flex-col md:flex-row md:justify-between mb-1">
-              <h3 className="text-lg font-semibold text-gray-800">
+              <h3 className="text-base md:text-lg font-semibold text-gray-800">
                 College projects 
               </h3> 
             </div>
             <div>
-              <h3 className="text-lg font-semibold text-gray-800">Appointium</h3>
+              <h3 className="text-base md:text-lg font-semibold text-gray-800">Appointium</h3>
               <ul className="list-disc pl-5 text-gray-700 space-y-1">
                 <li>
                   Built an online doctor appointment system with real-time slot booking and patient profiles
@@ -223,7 +219,7 @@ export default function Home() {
             </div>
 
             <div>
-              <h3 className="text-lg font-semibold text-gray-800">ReRead</h3>
+              <h3 className="text-base md:text-lg font-semibold text-gray-800">ReRead</h3>
               <ul className="list-disc pl-5 text-gray-700 space-y-1">
                 <li>
                   Developed a full-featured secondhand book marketplace frontend using React and Firebase
@@ -238,7 +234,7 @@ export default function Home() {
             </div>
 
             <div>
-              <h3 className="text-lg font-semibold text-gray-800">Recruiters</h3>
+              <h3 className="text-base md:text-lg font-semibold text-gray-800">Recruiters</h3>
               <ul className="list-disc pl-5 text-gray-700 space-y-1">
                 <li>
                   Built a recruitment platform for streamlining job posting and candidate management workflows
@@ -253,14 +249,14 @@ export default function Home() {
             </div>
           </div> */}
         </section>
-        <section className="mb-8">
-          <h2 className="text-xl font-bold text-gray-900 border-b border-gray-300 pb-1 mb-3">
+<section className="mb-4">
+          <h2 className="text-lg font-bold text-gray-900 border-b border-gray-300 pb-1 mb-3">
             PRODUCTS DEVELOPED
           </h2>
 
-          <div className="mb-6">
+          <div className="mb-4">
             <div className="flex flex-col md:flex-row md:justify-between mb-1">
-              <h3 className="text-lg font-semibold text-gray-800">
+              <h3 className="text-base md:text-lg font-semibold text-gray-800">
                 WizzGift (
                 <a
                   href="https://wizzgift.com"
@@ -273,15 +269,12 @@ export default function Home() {
                 )
               </h3>
             </div>
-            <ul className="list-disc pl-5 text-gray-700 space-y-1 mb-4">
+            <ul className="list-disc pl-5 text-gray-700 space-y-1 mb-3">
               <li>
                   Designed and implemented a modern, responsive frontend for the WizzGift gift card marketplace using react.js and Tailwind CSS
                 </li>
                 <li>
                   Built reusable UI components and maintained consistent styling across the platform
-                </li>
-                <li>
-                  Collaborated with the backend team to integrate RESTful APIs for product listings, order processing, and payment handling
                 </li>
                 <li>
                   Developed and optimized admin dashboard views for inventory management, analytics, and order tracking
@@ -291,9 +284,9 @@ export default function Home() {
                 </li>
             </ul>
           </div>
-          <div className="mb-6">
+          <div className="mb-4">
             <div className="flex flex-col md:flex-row md:justify-between mb-1">
-              <h3 className="text-lg font-semibold text-gray-800">
+              <h3 className="text-base md:text-lg font-semibold text-gray-800">
                 b2b.wizzgift (B2B Platform) (
                 <a
                   href="https://business.wizzgift.com/"
@@ -306,10 +299,7 @@ export default function Home() {
                 )
               </h3>
             </div>
-            <ul className="list-disc pl-5 text-gray-700 space-y-1 mb-4">
-              <li>
-                  Led the design and frontend development of WizzGift's B2B dashboard using React.js, Tailwind CSS, and TypeScript
-                </li>
+            <ul className="list-disc pl-5 text-gray-700 space-y-1 mb-3">
                 <li>
                   Designed the complete UI/UX flow from wireframing to high-fidelity components, focusing on usability and business utility
                 </li>
@@ -319,15 +309,12 @@ export default function Home() {
                 <li>
                   Integrated charts, filters, pagination, and export options to support real-time data insights for business users
                 </li>
-                <li>
-                  Ensured performance, accessibility (WCAG compliance), and responsive behavior across desktop and tablet devices
-                </li>
             </ul>
           </div>
 
-          <div className="mb-6">
+          <div className="mb-4">
             <div className="flex flex-col md:flex-row md:justify-between mb-1">
-              <h3 className="text-lg font-semibold text-gray-800">
+              <h3 className="text-base md:text-lg font-semibold text-gray-800">
                Creation Nepal (
           <a
             href="https://creationnepal.com"
@@ -340,7 +327,7 @@ export default function Home() {
           )
               </h3>
             </div>
-            <ul className="list-disc pl-5 text-gray-700 space-y-1 mb-4">
+            <ul className="list-disc pl-5 text-gray-700 space-y-1 mb-3">
               <li>
             Worked on frontend design fixes and minor UI improvements for smoother responsiveness and better accessibility.
           </li>
@@ -357,12 +344,12 @@ export default function Home() {
           
           {/* <div>
             <div className="flex flex-col md:flex-row md:justify-between mb-1">
-              <h3 className="text-lg font-semibold text-gray-800">
+              <h3 className="text-base md:text-lg font-semibold text-gray-800">
                 College projects 
               </h3> 
             </div>
             <div>
-              <h3 className="text-lg font-semibold text-gray-800">Appointium</h3>
+              <h3 className="text-base md:text-lg font-semibold text-gray-800">Appointium</h3>
               <ul className="list-disc pl-5 text-gray-700 space-y-1">
                 <li>
                   Built an online doctor appointment system with real-time slot booking and patient profiles
@@ -377,7 +364,7 @@ export default function Home() {
             </div>
 
             <div>
-              <h3 className="text-lg font-semibold text-gray-800">ReRead</h3>
+              <h3 className="text-base md:text-lg font-semibold text-gray-800">ReRead</h3>
               <ul className="list-disc pl-5 text-gray-700 space-y-1">
                 <li>
                   Developed a full-featured secondhand book marketplace frontend using React and Firebase
@@ -392,7 +379,7 @@ export default function Home() {
             </div>
 
             <div>
-              <h3 className="text-lg font-semibold text-gray-800">Recruiters</h3>
+              <h3 className="text-base md:text-lg font-semibold text-gray-800">Recruiters</h3>
               <ul className="list-disc pl-5 text-gray-700 space-y-1">
                 <li>
                   Built a recruitment platform for streamlining job posting and candidate management workflows
@@ -408,18 +395,18 @@ export default function Home() {
           </div> */}
         </section>
 
-        <section className="mb-8">
-          <h2 className="text-xl font-bold text-gray-900 border-b border-gray-300 pb-1 mb-3">
+<section className="mb-4">
+          <h2 className="text-lg font-bold text-gray-900 border-b border-gray-300 pb-1 mb-3">
             ACADEMIC PROJECTS
           </h2>
 
-          <div className="mb-6">
+          <div className="mb-4">
             <div className="flex flex-col md:flex-row md:justify-between mb-1">
-              <h3 className="text-lg font-semibold text-gray-800">
+              <h3 className="text-base md:text-lg font-semibold text-gray-800">
                 Appointium
               </h3>
             </div>
-            <ul className="list-disc pl-5 text-gray-700 space-y-1 mb-4">
+            <ul className="list-disc pl-5 text-gray-700 space-y-1 mb-3">
                 <li>
                   Built an online doctor appointment system with real-time slot booking and patient profiles
                 </li>
@@ -431,13 +418,13 @@ export default function Home() {
                 </li>
             </ul>
           </div>
-          <div className="mb-6">
+          <div className="mb-4">
             <div className="flex flex-col md:flex-row md:justify-between mb-1">
-              <h3 className="text-lg font-semibold text-gray-800">
+              <h3 className="text-base md:text-lg font-semibold text-gray-800">
                 ReRead
               </h3>
             </div>
-            <ul className="list-disc pl-5 text-gray-700 space-y-1 mb-4">
+            <ul className="list-disc pl-5 text-gray-700 space-y-1 mb-3">
               <li>
                   Developed a full-featured secondhand book marketplace frontend using React and Firebase
                 </li>
@@ -450,13 +437,13 @@ export default function Home() {
             </ul>
           </div>
 
-          <div className="mb-6">
+          <div className="mb-4">
             <div className="flex flex-col md:flex-row md:justify-between mb-1">
-              <h3 className="text-lg font-semibold text-gray-800">
+              <h3 className="text-base md:text-lg font-semibold text-gray-800">
                Recruiters 
               </h3>
             </div>
-            <ul className="list-disc pl-5 text-gray-700 space-y-1 mb-4">
+            <ul className="list-disc pl-5 text-gray-700 space-y-1 mb-3">
               <li>
                   Built a recruitment platform for streamlining job posting and candidate management workflows
                 </li>
@@ -473,12 +460,12 @@ export default function Home() {
           
           {/* <div>
             <div className="flex flex-col md:flex-row md:justify-between mb-1">
-              <h3 className="text-lg font-semibold text-gray-800">
+              <h3 className="text-base md:text-lg font-semibold text-gray-800">
                 College projects 
               </h3> 
             </div>
             <div>
-              <h3 className="text-lg font-semibold text-gray-800">Appointium</h3>
+              <h3 className="text-base md:text-lg font-semibold text-gray-800">Appointium</h3>
               <ul className="list-disc pl-5 text-gray-700 space-y-1">
                 <li>
                   Built an online doctor appointment system with real-time slot booking and patient profiles
@@ -493,7 +480,7 @@ export default function Home() {
             </div>
 
             <div>
-              <h3 className="text-lg font-semibold text-gray-800">ReRead</h3>
+              <h3 className="text-base md:text-lg font-semibold text-gray-800">ReRead</h3>
               <ul className="list-disc pl-5 text-gray-700 space-y-1">
                 <li>
                   Developed a full-featured secondhand book marketplace frontend using React and Firebase
@@ -508,7 +495,7 @@ export default function Home() {
             </div>
 
             <div>
-              <h3 className="text-lg font-semibold text-gray-800">Recruiters</h3>
+              <h3 className="text-base md:text-lg font-semibold text-gray-800">Recruiters</h3>
               <ul className="list-disc pl-5 text-gray-700 space-y-1">
                 <li>
                   Built a recruitment platform for streamlining job posting and candidate management workflows
@@ -524,12 +511,32 @@ export default function Home() {
           </div> */}
         </section>
 
+         <section className="mb-4">
+          <h2 className="text-lg font-bold text-gray-900 border-b border-gray-300 pb-1 mb-3">
+            ADDITIONAL SKILLS
+          </h2>
+          <ul className="list-disc pl-5 text-gray-700 space-y-1 mb-3">
+              <li>
+                 Professional Communication
+                </li>
+                <li>
+                 Problem Solving
+                </li>
+                <li>
+                  Project Coordination
+                </li>
+                <li>
+                Decision Making
+                </li>
+            </ul>
+        </section>
+
         {/* Education Section */}
-        {/* <section className="mb-8">
-          <h2 className="text-xl font-bold text-gray-900 border-b border-gray-300 pb-1 mb-3">
+        {/* <section className="mb-4">
+          <h2 className="text-lg font-bold text-gray-900 border-b border-gray-300 pb-1 mb-3">
             EDUCATION
           </h2>
-          <h3 className="text-lg font-semibold text-gray-800">
+          <h3 className="text-base md:text-lg font-semibold text-gray-800">
             Bachelor of Engineering in Computer Engineering (2019-2025)
           </h3>
           <p className="text-gray-700">
@@ -539,7 +546,7 @@ export default function Home() {
 
         {/* Additional Information Section */}
         {/* <section>
-          <h2 className="text-xl font-bold text-gray-900 border-b border-gray-300 pb-1 mb-3">
+          <h2 className="text-lg font-bold text-gray-900 border-b border-gray-300 pb-1 mb-3">
             ADDITIONAL INFORMATION
           </h2>
           <ul className="list-disc pl-5 text-gray-700 space-y-1">
@@ -566,3 +573,4 @@ export default function Home() {
     </main>
   );
 }
+
