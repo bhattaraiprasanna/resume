@@ -128,7 +128,7 @@ export default function Home() {
               Adbreakmedia
               </h3>
               <p className="text-gray-600">
-                Internship , December2024 - March2025
+                Internship , December2024 - February2025 
               </p>
             </div>
             <ul className="list-disc pl-5 text-gray-700 space-y-1 mb-3">
@@ -153,7 +153,7 @@ export default function Home() {
               Adbreakmedia
               </h3>
               <p className="text-gray-600">
-                Frontend Developer, March2024 - June2025, January2026 - Present
+                Frontend Developer, March2025 - June2025, January2026 - Present
               </p>
             </div>
             <ul className="list-disc pl-5 text-gray-700 space-y-1 mb-3">
