@@ -19,7 +19,7 @@ export function DownloadButton() {
       // ✅ Clone container to safely manipulate icons
       const clone = container.cloneNode(true) as HTMLElement
 
-      // ✅ Fix Lucide SVG misalignment by enforcing flex centering and size
+      // ✅ Fix Lucide SVG misalignment by preserving flex layout
       const icons = clone.querySelectorAll("svg")
       await Promise.all(
         Array.from(icons).map(async (icon) => {
@@ -34,15 +34,24 @@ export function DownloadButton() {
           img.width = icon.clientWidth || 16
           img.height = icon.clientHeight || 16
 
-          // ✅ Important part: keep alignment same as original SVG
+          // ✅ Preserve inline layout for PDF generation
           img.style.display = "inline-block"
           img.style.verticalAlign = "middle"
-          img.style.marginTop = "-2px" // fine-tunes downward alignment
-          img.style.marginRight = "2px"
+          img.style.marginRight = "4px" // Match the gap-1 (4px in Tailwind)
+          img.style.marginBottom = "2px" // Fine-tune vertical alignment
 
           icon.replaceWith(img)
         })
       )
+
+      // ✅ Ensure flex containers render properly in PDF
+      const flexContainers = clone.querySelectorAll('[class*="flex items-center"]')
+      flexContainers.forEach(container => {
+        const element = container as HTMLElement
+        element.style.display = "inline-flex"
+        element.style.alignItems = "center"
+        element.style.gap = "4px"
+      })
 
       // ✅ Create temporary wrapper for clean rendering
       const wrapper = document.createElement("div")
