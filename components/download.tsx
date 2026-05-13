@@ -10,7 +10,7 @@ export function DownloadButton() {
   const handleDownload = async () => {
     setIsDownloading(true)
     try {
-      const container = document.querySelector(".container") as HTMLElement | null
+      const container = document.querySelector("#resume-content") as HTMLElement | null
       if (!container) throw new Error("Resume container not found")
 
       const html2canvas = (await import("html2canvas")).default
@@ -83,7 +83,8 @@ export function DownloadButton() {
       console.error("Download failed:", err)
       // Never fall back to printing from the download button.
       // Printing should only happen via the dedicated PrintButton.
-      alert("Download failed. Please try again.")
+      const errorMessage = err instanceof Error ? err.message : "Unknown error occurred"
+      alert(`Download failed: ${errorMessage}. Please try again.`)
     } finally {
       setTimeout(() => setIsDownloading(false), 500)
     }
