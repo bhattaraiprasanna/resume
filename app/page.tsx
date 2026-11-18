@@ -76,7 +76,7 @@ export default function Home() {
             EDUCATION
           </h2>
           <h3 className="font-semibold text-gray-800">
-            Bachelor of Engineering in Computer Engineering (2019-2025)
+            Bachelor of Engineering in Computer Engineering (September 2019- February 2026)
           </h3>
           <p className="text-gray-700">
             Gandaki College Of Engineering and Science | Pokhara, Nepal
@@ -147,7 +147,7 @@ export default function Home() {
             </ul>
           </div>
 
-          <div className="mb-4">
+          {/* <div className="mb-4">
             <div className="flex flex-col md:flex-row md:justify-between mb-1">
               <h3 className="text-base md:text-lg font-semibold text-gray-800">
               Adbreakmedia
@@ -174,8 +174,8 @@ export default function Home() {
                 Improved page performance through lazy loading, code splitting, and caching strategies
               </li>
             </ul>
-          </div>
-          <div className="mb-4">
+          </div> */}
+          {/* <div className="mb-4">
     <div className="flex flex-col md:flex-row md:justify-between mb-0.5">
       <h3 className="text-base md:text-lg font-semibold text-gray-800">Data Saturn</h3>
       <p className="text-gray-600">Frontend Developer, September2025 - October2025</p>
@@ -194,7 +194,7 @@ export default function Home() {
         Ensured reusable, well-structured, and clean frontend code following best practices.
       </li>
     </ul>
-  </div>
+  </div> */}
 
 
           {/* <div>
@@ -271,7 +271,7 @@ export default function Home() {
             </div>
             <ul className="list-disc pl-5 text-gray-700 space-y-1 mb-3">
               <li>
-                  Designed and implemented a modern, responsive frontend for the WizzGift gift card marketplace using react.js and Tailwind CSS
+                  Designed and implemented a responsive frontend for the WizzGift gift card marketplace using react.js and Tailwind CSS
                 </li>
                 <li>
                   Built reusable UI components and maintained consistent styling across the platform
@@ -284,7 +284,7 @@ export default function Home() {
                 </li>
             </ul>
           </div>
-          <div className="mb-4">
+          {/* <div className="mb-4">
             <div className="flex flex-col md:flex-row md:justify-between mb-1">
               <h3 className="text-base md:text-lg font-semibold text-gray-800">
                 b2b.wizzgift (B2B Platform) (
@@ -310,9 +310,9 @@ export default function Home() {
                   Integrated charts, filters, pagination, and export options to support real-time data insights for business users
                 </li>
             </ul>
-          </div>
+          </div> */}
 
-          <div className="mb-4">
+          {/* <div className="mb-4">
             <div className="flex flex-col md:flex-row md:justify-between mb-1">
               <h3 className="text-base md:text-lg font-semibold text-gray-800">
                Creation Nepal (
@@ -338,7 +338,7 @@ export default function Home() {
             Assisted in layout adjustments and performance refinements during development cycles.
           </li>
             </ul>
-          </div>
+          </div> */}
 
           
           
@@ -418,7 +418,7 @@ export default function Home() {
                 </li>
             </ul>
           </div>
-          <div className="mb-4">
+          {/* <div className="mb-4">
             <div className="flex flex-col md:flex-row md:justify-between mb-1">
               <h3 className="text-base md:text-lg font-semibold text-gray-800">
                 ReRead
@@ -435,7 +435,7 @@ export default function Home() {
                   Designed the UI for a seamless mobile and desktop experience, including dark mode support
                 </li>
             </ul>
-          </div>
+          </div> */}
 
           <div className="mb-4">
             <div className="flex flex-col md:flex-row md:justify-between mb-1">
@@ -448,7 +448,7 @@ export default function Home() {
                   Built a recruitment platform for streamlining job posting and candidate management workflows
                 </li>
                 <li>
-                  Designed intuitive UI for job creation, application tracking, and role-based access control
+                  Designed UI for job creation, application tracking, and role-based access control
                 </li>
                 <li>
                   Integrated charts and metrics dashboards for HR teams to monitor hiring efficiency
