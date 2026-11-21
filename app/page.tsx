@@ -76,7 +76,7 @@ export default function Home() {
             EDUCATION
           </h2>
           <h3 className="font-semibold text-gray-800">
-            Bachelor of Engineering in Computer Engineering (September 2019- February 2026)
+            Bachelor of Engineering in Computer Engineering (September 2019- August 2025)
           </h3>
           <p className="text-gray-700">
             Gandaki College Of Engineering and Science | Pokhara, Nepal
